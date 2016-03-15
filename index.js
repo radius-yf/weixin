@@ -14,10 +14,13 @@ app.use(function *(next){
 });
 
 app.use(function *(){
+	console.log(this.query);
 	if (utils.checkSignature(this.query.signature, this.query.timestamp, this.query.nonce)) {
 		this.body = this.query.echostr;
+		console.log("success");
 	} else {
 		this.body = "error";
+		console.log("error");
 	}
 });
 
