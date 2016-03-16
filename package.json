@@ -17,6 +17,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "co-wechat": "0.0.4",
     "koa": "^1.2.0"
   },
   "devDependencies": {
