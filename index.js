@@ -6,4 +6,4 @@ var weixin = require("./router/weixin");
 var app = koa();
 
 app.use(weixin.routes());
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
