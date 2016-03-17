@@ -1,7 +1,7 @@
-const koa = require("koa");
-const weixin = require("./router/weixin");
+const express = require("express");
 
-const app = koa();
+const app = express();
 
-app.use(weixin.routes());
+app.use('/', require("./router/index"));
+app.use('/weixin', require("./router/weixin"));
 app.listen(process.env.PORT || 3000);
