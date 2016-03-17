@@ -18,7 +18,8 @@
   "license": "ISC",
   "dependencies": {
     "co-wechat": "0.0.4",
-    "koa": "^1.2.0"
+    "koa": "^1.2.0",
+    "koa-router": "^5.4.0"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
