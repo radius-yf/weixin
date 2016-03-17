@@ -18,5 +18,7 @@ async function chat(info, userid) {
 	});
 }
 module.exports = async function(msg) {
-	return chat(msg.Content, msg.FromUserName);
+	var result = await chat(msg.Content, msg.FromUserName);
+	var jsonObj = JSON.parse(result);
+	return jsonObj.text;
 }
