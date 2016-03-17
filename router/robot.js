@@ -13,12 +13,10 @@ async function chat(info, userid) {
 		};
 		request(url + qs.stringify(param) , (err, res, body)=> {
 			if(err) reject(err);
-			resolve(body);
+			resolve(JSON.parse(body).text);
 		});
 	});
 }
 module.exports = async function(msg) {
-	var result = await chat(msg.Content, msg.FromUserName);
-	var jsonObj = JSON.parse(result);
-	return jsonObj.text;
+	return chat(msg.Content, msg.FromUserName);
 }
