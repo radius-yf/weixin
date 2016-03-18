@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const config = require('../config');
 
-const db = mongoose.createConnection('mongodb://192.168.75.1/test');
+const db = mongoose.createConnection(config.dbconnect);
 
 var UserSchema = new mongoose.Schema({
     openid: String,
