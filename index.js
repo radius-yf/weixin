@@ -1,7 +1,6 @@
 require("babel-core/register");
 require("babel-polyfill");
 const express = require("express");
-const config = require("./config");
 
 const app = express();
 

@@ -1,38 +1,17 @@
-const mongoose = require('mongoose');
-const config = require('../config');
+import db from "./connect";
+import mongoose from "mongoose";
 
-const db = mongoose.createConnection(config.dbconnect);
+let MsgSchema = new mongoose.Schema({
+    content: String,
+    createtime: Date,
+    msgid: Number,
+    msgtype: String
+});
+let MsgModel = db.model("Msg", MsgSchema);
 
-var UserSchema = new mongoose.Schema({
+let UserSchema = new mongoose.Schema({
     openid: String,
     name: String,
-    chatinfo:[{
-        content: String,
-        createtime: Date,
-        msgid: Number,
-        msgtype: String
-    }]
+    chatinfo:[MsgSchema]
 });
-var UserModel = db.model("User", UserSchema);
-
-UserModel.find().then(docs=> {
-    console.log(docs);
-    db.close();
-});
-
-// UserModel.create({
-//     openid: "zpy",
-//     name: "张培园",
-//     money: 100.00
-// }).then(function (err) {
-//     if (!err) {
-//         console.log("success");
-//     }
-//     db.close();
-// })
-
-
-// UserModel.remove().then(function () {
-//     console.log("success");
-//     db.close();
-// });
+export var UserModel = db.model("User", UserSchema);
