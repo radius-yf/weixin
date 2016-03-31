@@ -1,0 +1,8 @@
+{
+	"mongodb": "mongodb://192.168.75.1/test",
+	"mysql": "mysql://root:123456@192.168.75.1/test",
+	"weixin": {
+		"token": "MmQBowVEBsNiaY0",
+		"enencodingAESKey": "hSlFTSUUn1T1DzbddNSFy1CCfPLfAHd7cRaxd4ufkKp"
+	}
+}

@@ -7,6 +7,7 @@ let MsgSchema = new mongoose.Schema({
     msgid: Number,
     msgtype: String
 });
+
 let MsgModel = db.model("Msg", MsgSchema);
 
 let UserSchema = new mongoose.Schema({
@@ -14,4 +15,5 @@ let UserSchema = new mongoose.Schema({
     name: String,
     chatinfo:[MsgSchema]
 });
+
 export var UserModel = db.model("User", UserSchema);
