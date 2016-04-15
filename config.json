@@ -1,6 +1,6 @@
 {
 	"mongodb": "mongodb://192.168.75.1/test",
-	"mysql": "mysql://root:123456@192.168.75.1/test",
+	"mysql": "mysql://r18n4bnfzt11782c:123456@rds08ct7o3fm7wuqbe69.mysql.rds.aliyuncs.com/r18n4bnfzt11782c",
 	"weixin": {
 		"token": "MmQBowVEBsNiaY0",
 		"enencodingAESKey": "hSlFTSUUn1T1DzbddNSFy1CCfPLfAHd7cRaxd4ufkKp"
