@@ -15,7 +15,7 @@ async function chat(content, openid) {
 		request(url + qs.stringify(param) , (err, res, body)=> {
 			if(err) reject(err);
 			let result = JSON.parse(body).text;
-			await Message.create({
+			Message.create({
 				openid,
 				content,
 				result
