@@ -28,7 +28,7 @@ export default async function(msg) {
 
 	let result = null;
 	if (content !== undefined && content !== null && content !== "") {
-		result = chat(content, openid);
+		result = await chat(content, openid);
 	} else {
 		console.log(msg);
 	}
