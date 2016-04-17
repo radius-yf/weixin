@@ -26,18 +26,12 @@ export default async function(msg) {
 	let openid = msg.FromUserName;
 	let content = msg.Content;
 
+	console.log(msg);
 	let result = null;
 	if (content !== undefined && content !== null && content !== "") {
 		result = await chat(content, openid);
-	} else {
-		console.log(msg);
 	}
 
-	console.log({
-		openid,
-		content,
-		result
-	});
 	Message.create({
 		openid,
 		content,

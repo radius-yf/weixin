@@ -3,6 +3,7 @@
 	"mysql": "mysql://r18n4bnfzt11782c:123456@rds08ct7o3fm7wuqbe69.mysql.rds.aliyuncs.com/r18n4bnfzt11782c",
 	"weixin": {
 		"token": "MmQBowVEBsNiaY0",
+		"appid": "wxd26961d847db4191",
 		"enencodingAESKey": "hSlFTSUUn1T1DzbddNSFy1CCfPLfAHd7cRaxd4ufkKp"
 	}
 }
