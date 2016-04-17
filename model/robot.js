@@ -33,6 +33,11 @@ export default async function(msg) {
 		console.log(msg);
 	}
 
+	console.log({
+		openid,
+		content,
+		result
+	});
 	Message.create({
 		openid,
 		content,
