@@ -63,22 +63,18 @@ export default async function(msg) {
 	let content = msg.Content;
 
 	console.log(msg);
-	try {
-		let isAdmin = await isAdmin(openid);
-	} catch (e) {
-		console.log(e);
-	}
+	let is = await isAdmin(openid);
 	console.log(isAdmin);
 
 	let result = null;
 	if (content !== undefined && content !== null && content !== "") {
-		if (/^￥(\d+\.?\d{0,2}) (.*)$/.test(content) && isAdmin.user) {
+		if (/^￥(\d+\.?\d{0,2}) (.*)$/.test(content) && is.user) {
 			console.log("调用charge");
 			result = await cost(RegExp.$1, RegExp.$2, openid);
-		} else if (/^\$(.*)$/.test(content) && isAdmin.user) {
+		} else if (/^\$(.*)$/.test(content) && is.user) {
 			console.log("调用usercmd " + isUser(openid));
 			user(RegExp.$1, openid);
-		} else if (/^#(.*)$/.test(content) && isAdmin.admin) {
+		} else if (/^#(.*)$/.test(content) && is.admin) {
 			admin(RegExp.$1, openid);
 		} else {
 			console.log("调用chat");
