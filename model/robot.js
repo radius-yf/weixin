@@ -62,17 +62,19 @@ export default async function(msg) {
 	let openid = msg.FromUserName;
 	let content = msg.Content;
 
+	let isAdmin = await isAdmin(openid);
+
 	console.log(msg);
 	let result = null;
 	if (content !== undefined && content !== null && content !== "") {
-		if (/^￥(\d+\.?\d{0,2}) (.*)$/.test(content) && await isUser(openid)) {
+		if (/^￥(\d+\.?\d{0,2}) (.*)$/.test(content) && isAdmin.user) {
 			console.log("调用charge");
 			result = await cost(RegExp.$1, RegExp.$2, openid);
-		} else if (/^\$(.*)$/.test(content) && await isUser(openid)) {
+		} else if (/^\$(.*)$/.test(content) && isAdmin.user) {
 			console.log("调用usercmd " + isUser(openid));
-			usercmd(RegExp.$1, openid);
-		} else if (/^#(.*)$/.test(content) && await isAdmin(openid)) {
-			admin(RegExp.$1, openid)
+			user(RegExp.$1, openid);
+		} else if (/^#(.*)$/.test(content) && isAdmin.admin) {
+			admin(RegExp.$1, openid);
 		} else {
 			console.log("调用chat");
 			result = await chat(content, openid);
@@ -87,24 +89,20 @@ export default async function(msg) {
 	return result;
 }
 
-async function isUser(openid) {
-	let data = await User.findOne({
-		where: {
-			openid
-		}
-	});
-	return data !== null;
-}
+
 async function isAdmin(openid) {
 	let data = await User.findOne({
 		where: {
 			openid
 		}
 	});
-	return data !== null && data.isAdmin;
+	return {
+		user: data !== null,
+		admin: data !== null && data.isAdmin
+	}
 }
 // 功能导航
-async function usercmd(cmd, openid) {
+async function user(cmd, openid) {
 	console.log(cmd);
 	if (/^month/.test(cmd)) {
 		return month(openid);
