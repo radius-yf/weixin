@@ -1,6 +1,6 @@
-import db from "./connect";
+import getConn from "./connect";
 import Sequelize from "sequelize";
-let User = db.define("user", {
+let User = getConn().define("user", {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
@@ -11,7 +11,8 @@ let User = db.define("user", {
   openid: {
     type: Sequelize.STRING,
     unique: true
-  }
+  },
+  isAdmin: Sequelize.BOOLEAN
 });
 User.sync();
 export default User;

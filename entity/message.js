@@ -1,6 +1,6 @@
-import db from "./connect";
+import getConn from "./connect";
 import Sequelize from "sequelize";
-let Message = db.define("message", {
+let Message = getConn().define("message", {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,

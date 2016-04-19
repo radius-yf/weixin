@@ -6,5 +6,9 @@ import config from "../config";
 //     host: "rds08ct7o3fm7wuqbe69.mysql.rds.aliyuncs.com",
 //     port: 3306
 // });
-var db = new Sequelize(config.mysql);
-export default db;
+var db = new Sequelize(config.mysql, {
+  timezone: "+08:00"
+});
+export default function () {
+  return db;
+};
