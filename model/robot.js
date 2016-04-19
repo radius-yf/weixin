@@ -62,9 +62,10 @@ export default async function(msg) {
 	let openid = msg.FromUserName;
 	let content = msg.Content;
 
-	let isAdmin = await isAdmin(openid);
-
 	console.log(msg);
+	let isAdmin = await isAdmin(openid);
+	console.log(isAdmin);
+
 	let result = null;
 	if (content !== undefined && content !== null && content !== "") {
 		if (/^￥(\d+\.?\d{0,2}) (.*)$/.test(content) && isAdmin.user) {
@@ -115,3 +116,9 @@ async function admin(cmd, openid) {
 	}
 	return "未找到命令";
 }
+
+
+isAdmin("omR7Qw50GHrKHwzXOYIHu1SmM6XM").then(result => {
+	console.log(result.user);
+	console.log(result.admin);
+})
