@@ -34,8 +34,8 @@ async function cost(money, content, openid) {
 	return `记录成功
 编号:${data.id}
 价格:${data.money}
-备注:${data.content}
-使用 $del cost ${data.id} 命令可以删除记录`;
+备注:${data.content}`;
+// 使用 $del cost ${data.id} 命令可以删除记录`;
 }
 
 // $month 查看本月账单
@@ -65,7 +65,7 @@ export default async function(msg) {
 	console.log(msg);
 	let result = null;
 	if (content !== undefined && content !== null && content !== "") {
-		if (/^￥(\d+\.?\d{0,2}) (.*)$/.test(content)) {
+		if (/^￥(\d+\.?\d{0,2}) (.*)$/.test(content) && isUser(openid)) {
 			console.log("调用charge");
 			result = await cost(RegExp.$1, RegExp.$2, openid);
 		} else if (/^\$(.*)$/.test(content) && isUser(openid)) {
@@ -115,5 +115,3 @@ async function admin(cmd, openid) {
 	}
 	return "未找到命令";
 }
-
-usercmd("month", "radius").then(console.log);
