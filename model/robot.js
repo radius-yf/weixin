@@ -69,7 +69,7 @@ export default async function(msg) {
 			console.log("调用charge");
 			result = await cost(RegExp.$1, RegExp.$2, openid);
 		} else if (/^\$(.*)$/.test(content) && isUser(openid)) {
-			console.log("调用usercmd");
+			console.log("调用usercmd " + isUser(openid));
 			usercmd(RegExp.$1, openid);
 		} else if (/^#(.*)$/.test(content) && isAdmin(openid)) {
 			admin(RegExp.$1, openid)
@@ -105,6 +105,7 @@ async function isAdmin(openid) {
 }
 // 功能导航
 async function usercmd(cmd, openid) {
+	console.log(cmd);
 	if (/^month/.test(cmd)) {
 		return month(openid);
 	}
