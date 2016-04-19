@@ -63,7 +63,11 @@ export default async function(msg) {
 	let content = msg.Content;
 
 	console.log(msg);
-	let isAdmin = await isAdmin(openid);
+	try {
+		let isAdmin = await isAdmin(openid);
+	} catch (e) {
+		console.log(e);
+	}
 	console.log(isAdmin);
 
 	let result = null;
