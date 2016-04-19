@@ -21,14 +21,16 @@ function chat(content, openid) {
 		});
 	});
 }
-
 async function charge(money, content, openid) {
-	let data = Bill.create({
-		openid,
-		content,
-		money
-	});
-	console.log(data);
+	try {
+		Bill.create({
+			openid,
+			content,
+			money
+		});
+	} catch (e) {
+		console.error(e);
+	}
 	return "success";
 }
 
@@ -41,7 +43,7 @@ export default async function(msg) {
 	if (content !== undefined && content !== null && content !== "") {
 		if (/^￥(\d+\.?\d{0,2}) (.*)/.test(content)) {
 			console.log("调用charge");
-			result = await charge(parseDouble(RegExp.$1), RegExp.$2, openid);
+			result = await charge(RegExp.$1, RegExp.$2, openid);
 		} else {
 			console.log("调用chat");
 			result = await chat(content, openid);
