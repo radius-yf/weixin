@@ -69,6 +69,7 @@ export default async function(msg) {
 			console.log("调用charge");
 			result = await cost(RegExp.$1, RegExp.$2, openid);
 		} else if (/^\$(.*)$/.test(content) && isUser(openid)) {
+			console.log("调用usercmd");
 			usercmd(RegExp.$1, openid);
 		} else if (/^#(.*)$/.test(content) && isAdmin(openid)) {
 			admin(RegExp.$1, openid)
