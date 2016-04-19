@@ -65,13 +65,13 @@ export default async function(msg) {
 	console.log(msg);
 	let result = null;
 	if (content !== undefined && content !== null && content !== "") {
-		if (/^￥(\d+\.?\d{0,2}) (.*)$/.test(content) && isUser(openid)) {
+		if (/^￥(\d+\.?\d{0,2}) (.*)$/.test(content) && await isUser(openid)) {
 			console.log("调用charge");
 			result = await cost(RegExp.$1, RegExp.$2, openid);
-		} else if (/^\$(.*)$/.test(content) && isUser(openid)) {
+		} else if (/^\$(.*)$/.test(content) && await isUser(openid)) {
 			console.log("调用usercmd " + isUser(openid));
 			usercmd(RegExp.$1, openid);
-		} else if (/^#(.*)$/.test(content) && isAdmin(openid)) {
+		} else if (/^#(.*)$/.test(content) && await isAdmin(openid)) {
 			admin(RegExp.$1, openid)
 		} else {
 			console.log("调用chat");
