@@ -64,7 +64,7 @@ export default async function(msg) {
 
 	console.log(msg);
 	let is = await isAdmin(openid);
-	console.log(isAdmin);
+	console.log(is);
 
 	let result = null;
 	if (content !== undefined && content !== null && content !== "") {
