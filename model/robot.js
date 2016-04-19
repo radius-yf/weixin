@@ -73,9 +73,9 @@ export default async function(msg) {
 			result = await cost(RegExp.$1, RegExp.$2, openid);
 		} else if (/^\$(.*)$/.test(content) && is.user) {
 			console.log("调用usercmd " + isUser(openid));
-			user(RegExp.$1, openid);
+			result = await user(RegExp.$1, openid);
 		} else if (/^#(.*)$/.test(content) && is.admin) {
-			admin(RegExp.$1, openid);
+			result = await admin(RegExp.$1, openid);
 		} else {
 			console.log("调用chat");
 			result = await chat(content, openid);
