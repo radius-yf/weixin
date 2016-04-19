@@ -64,21 +64,17 @@ export default async function(msg) {
 
 	console.log(msg);
 	let is = await isAdmin(openid);
-	console.log(is);
 
 
 	let result = null;
 	if (content !== undefined && content !== null && content !== "") {
 		if (/^￥(\d+\.?\d{0,2}) (.*)$/.test(content) && is.user) {
-			console.log("调用charge");
 			result = await cost(RegExp.$1, RegExp.$2, openid);
 		} else if (/^\$(.*)$/.test(content) && is.user) {
-			console.log("调用usercmd " + is.user);
 			result = await user(RegExp.$1, openid);
 		} else if (/^#(.*)$/.test(content) && is.admin) {
 			result = await admin(RegExp.$1, openid);
 		} else {
-			console.log("调用chat");
 			result = await chat(content, openid);
 		}
 	}
@@ -105,7 +101,6 @@ async function isAdmin(openid) {
 }
 // 功能导航
 async function user(cmd, openid) {
-	console.log(cmd);
 	if (/^month/.test(cmd)) {
 		return month(openid);
 	}
@@ -117,9 +112,3 @@ async function admin(cmd, openid) {
 	}
 	return "未找到命令";
 }
-
-
-isAdmin("omR7Qw50GHrKHwzXOYIHu1SmM6XM").then(result => {
-	console.log(result.user);
-	console.log(result.admin);
-})
