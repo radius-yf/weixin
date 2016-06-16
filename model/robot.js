@@ -1,8 +1,9 @@
-import request from "request";
-import qs from "querystring";
-import Message from "../entity/message";
-import Bill from "../entity/bill";
-import User from "../entity/user";
+import request from "request"
+import qs from "querystring"
+import Message from "../entity/message"
+import Bill from "../entity/bill"
+import User from "../entity/user"
+import Route from "./route"
 
 const url = "http://www.tuling123.com/openapi/api?";
 const key = "ed37d6e5d22c83abc323ff7622c2f8f7";
@@ -56,35 +57,31 @@ async function month(openid) {
 	return data.map((item) => `编号:${item.id} 价格:${item.money} 备注:${item.content}`).join("\n")
 }
 
-
+const robot = Route();
+robot.use("$",admin);
+robot.use("#",superAdmin);
 // default
 export default async function(msg) {
 	let openid = msg.FromUserName;
 	let content = msg.Content;
+	let req = {
+		openid,
+		content
+	};
+	let res = {};
 
-	console.log(msg);
-	let is = await isAdmin(openid);
-
-
-	let result = null;
-	if (content !== undefined && content !== null && content !== "") {
-		if (/^￥(\d+\.?\d{0,2}) (.*)$/.test(content) && is.user) {
-			result = await cost(RegExp.$1, RegExp.$2, openid);
-		} else if (/^\$(.*)$/.test(content) && is.user) {
-			result = await user(RegExp.$1, openid);
-		} else if (/^#(.*)$/.test(content) && is.admin) {
-			result = await admin(RegExp.$1, openid);
-		} else {
-			result = await chat(content, openid);
-		}
+	if (/^(\$|#)(\s|[a-zA-Z])/.test(content)) {
+		robot(req, res, [RegExp.$1, ...content.substring(1).split(" ").filter(i => i!=="")]);
+	} else {
+		res.body = await chat(content, openid);
 	}
 
 	Message.create({
 		openid,
 		content,
-		result
+		result: res.body
 	});
-	return result;
+	return res.body;
 }
 
 
